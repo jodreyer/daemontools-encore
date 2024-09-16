@@ -14,13 +14,9 @@ int main()
 	x = (gid_t *)malloc(ngroups_max *sizeof(gid_t));
   
     x[0] = x[1] = 1;
-    if (getgroups(ngroups_max,x) == 0) {
-        if (setgroups(ngroups_max,x) == -1) _exit(1);
-    }
+    if (getgroups(ngroups_max,x) == 0) if (setgroups(ngroups_max,x) == -1) _exit(1);
   
-    if (getgroups(ngroups_max,x) == -1) {
-        _exit(1);
-    }
+    if (getgroups(ngroups_max,x) == -1) _exit(1);
     if (x[1] != 1) _exit(1);
     x[1] = 2;
     if (getgroups(ngroups_max,x) == -1) _exit(1);
